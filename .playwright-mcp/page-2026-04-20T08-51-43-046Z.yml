@@ -1,0 +1,137 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "D Ditto Lab" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: D
+        - text: Ditto Lab
+      - generic [ref=e6]:
+        - link "Dashboard" [ref=e7] [cursor=pointer]:
+          - /url: /dashboard
+        - link "Insights" [ref=e8] [cursor=pointer]:
+          - /url: /insights
+        - generic [ref=e9]:
+          - generic [ref=e10]: "|"
+          - combobox [ref=e11] [cursor=pointer]:
+            - option "Select user" [disabled]
+            - option "Alex Torres"
+            - option "Jordan Rivera"
+            - option "Maya Chen" [selected]
+            - option "Priya Nair"
+            - option "Sam Park"
+  - generic [ref=e12]:
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - heading "Maya Chen" [level=1] [ref=e16]
+        - paragraph [ref=e17]: Computer Science · Age 20
+        - paragraph [ref=e18]: Junior CS major who spends weekends on hiking trails and weeknights experimenting with new recipes. Big fan of film photography and live shows.
+        - generic [ref=e19]:
+          - generic [ref=e20]: hiking
+          - generic [ref=e21]: indie music
+          - generic [ref=e22]: cooking
+          - generic [ref=e23]: photography
+      - generic [ref=e24]: M
+    - paragraph [ref=e25]: Your Micro-Quests
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: A
+          - generic [ref=e30]:
+            - paragraph [ref=e31]: Your match
+            - paragraph [ref=e32]: Alex Torres
+            - paragraph [ref=e33]: Music Production
+        - generic [ref=e34]: Date Recommended
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e38]:
+            - heading "Bookstore Scavenger" [level=3] [ref=e39]
+            - generic [ref=e40]:
+              - generic [ref=e41]: 30 min
+              - generic [ref=e42]: Campus bookstore or library
+          - paragraph [ref=e43]: Visit the campus bookstore or a nearby bookshop. Each person picks one book they'd gift the other — you have 10 minutes. Then explain your choice.
+          - generic [ref=e44]:
+            - paragraph [ref=e45]: Reflection Prompts
+            - list [ref=e46]:
+              - listitem [ref=e47]:
+                - generic [ref=e48]: "1."
+                - generic [ref=e49]: Why did you pick that book for me?
+              - listitem [ref=e50]:
+                - generic [ref=e51]: "2."
+                - generic [ref=e52]: What book has changed the way you think about something?
+              - listitem [ref=e53]:
+                - generic [ref=e54]: "3."
+                - generic [ref=e55]: If your life were a book, what genre would it be?
+        - generic [ref=e163]:
+          - generic [ref=e164]:
+            - paragraph [ref=e165]: Your feedback submitted
+            - generic [ref=e166]:
+              - generic [ref=e167]: Chemistry 4/5
+              - generic [ref=e168]: Comfort 4/5
+              - generic [ref=e169]: "Real date: yes"
+          - generic [ref=e170]:
+            - paragraph [ref=e171]: ✨
+            - paragraph [ref=e172]: Real date recommended!
+            - paragraph [ref=e173]: Both you and Alex Torres are feeling it. Time to plan something real.
+    - generic [ref=e89]:
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - generic [ref=e92]: J
+          - generic [ref=e93]:
+            - paragraph [ref=e94]: Your match
+            - paragraph [ref=e95]: Jordan Rivera
+            - paragraph [ref=e96]: Environmental Studies
+        - generic [ref=e97]: Quest Active
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e101]:
+            - heading "Campus Café Conversation" [level=3] [ref=e102]
+            - generic [ref=e103]:
+              - generic [ref=e104]: 30 min
+              - generic [ref=e105]: Campus café or coffee shop
+          - paragraph [ref=e106]: Grab a drink at the campus café together. Sit down for 30 minutes and answer the reflection prompts out loud to each other. No phones allowed during the conversation.
+          - generic [ref=e107]:
+            - paragraph [ref=e108]: Reflection Prompts
+            - list [ref=e109]:
+              - listitem [ref=e110]:
+                - generic [ref=e111]: "1."
+                - generic [ref=e112]: What's one thing you're genuinely excited about this semester?
+              - listitem [ref=e113]:
+                - generic [ref=e114]: "2."
+                - generic [ref=e115]: Describe your ideal Saturday — no obligations, no plans. What does it look like?
+              - listitem [ref=e116]:
+                - generic [ref=e117]: "3."
+                - generic [ref=e118]: What's something most people wouldn't guess about you?
+        - generic [ref=e119]:
+          - heading "Rate the vibes" [level=3] [ref=e120]
+          - generic [ref=e121]:
+            - generic [ref=e122]:
+              - generic [ref=e123]:
+                - paragraph [ref=e124]: Chemistry
+                - paragraph [ref=e125]: How naturally did the conversation flow?
+              - generic [ref=e126]:
+                - button "☆" [ref=e127] [cursor=pointer]
+                - button "☆" [ref=e128] [cursor=pointer]
+                - button "☆" [ref=e129] [cursor=pointer]
+                - button "☆" [ref=e130] [cursor=pointer]
+                - button "☆" [ref=e131] [cursor=pointer]
+            - generic [ref=e132]:
+              - generic [ref=e133]:
+                - paragraph [ref=e134]: Comfort
+                - paragraph [ref=e135]: How at ease did you feel around them?
+              - generic [ref=e136]:
+                - button "☆" [ref=e137] [cursor=pointer]
+                - button "☆" [ref=e138] [cursor=pointer]
+                - button "☆" [ref=e139] [cursor=pointer]
+                - button "☆" [ref=e140] [cursor=pointer]
+                - button "☆" [ref=e141] [cursor=pointer]
+          - generic [ref=e142]:
+            - paragraph [ref=e143]: Would you go on a real date?
+            - generic [ref=e144]:
+              - button "Yes!" [ref=e145] [cursor=pointer]
+              - button "Maybe..." [ref=e146] [cursor=pointer]
+              - button "No" [ref=e147] [cursor=pointer]
+          - generic [ref=e148]:
+            - generic [ref=e149]: Any thoughts? (optional)
+            - textbox "What stood out? What felt off? Anything you'd want the matcher to know..." [ref=e150]
+          - button "Submit Feedback" [disabled] [ref=e151]
+  - alert [ref=e152]

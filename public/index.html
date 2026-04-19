@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ditto Task | Intent Profile Builder</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">First feature for a modern dating platform</p>
+          <h1>Build trust before the first match.</h1>
+          <p class="hero-text">
+            My take on version one is a clarity-first dating app. Instead of optimizing for
+            swipes, it helps people create higher-signal profiles that express intent,
+            personality, and boundaries up front.
+          </p>
+          <div class="hero-points">
+            <span>Customer problem: low-effort profiles</span>
+            <span>Product bet: clearer profiles create better conversations</span>
+            <span>Feature shipped: Intent Profile Builder</span>
+          </div>
+        </div>
+
+        <aside class="score-panel">
+          <div class="score-ring">
+            <span id="totalScore">0</span>
+            <small>signal score</small>
+          </div>
+          <div class="score-breakdown" id="scoreBreakdown"></div>
+          <div class="score-insights">
+            <h2>What this tells us</h2>
+            <ul id="strengthList"></ul>
+            <ul id="suggestionList"></ul>
+          </div>
+        </aside>
+      </header>
+
+      <main class="workspace">
+        <section class="panel panel-form">
+          <div class="panel-heading">
+            <p class="eyebrow">Profile inputs</p>
+            <h2>Intent Profile Builder</h2>
+            <p>
+              This feature guides new users through the minimum information needed to create a
+              profile that leads to better first conversations.
+            </p>
+          </div>
+
+          <form id="profileForm" class="profile-form">
+            <div class="input-grid">
+              <label>
+                Display name
+                <input name="name" type="text" maxlength="24" placeholder="Jordan" />
+              </label>
+              <label>
+                Age
+                <input name="age" type="number" min="18" max="99" placeholder="29" />
+              </label>
+              <label>
+                City
+                <input name="city" type="text" maxlength="28" placeholder="Chicago" />
+              </label>
+              <label>
+                Dating intent
+                <select name="intent">
+                  <option value="">Choose one</option>
+                  <option value="long_term">Long-term relationship</option>
+                  <option value="figuring_it_out">Figuring it out intentionally</option>
+                  <option value="short_term">Short-term dating</option>
+                  <option value="new_to_city">New to the city, open to connection</option>
+                  <option value="new_friends">Friends first</option>
+                </select>
+              </label>
+              <label>
+                Pace
+                <select name="pace">
+                  <option value="">Choose one</option>
+                  <option value="slow_burn">Slow burn</option>
+                  <option value="steady">Intentional and steady</option>
+                  <option value="go_with_flow">See where it goes</option>
+                  <option value="this_week">Ready to meet this week</option>
+                </select>
+              </label>
+              <label>
+                Communication style
+                <select name="communication">
+                  <option value="">Choose one</option>
+                  <option value="consistent">Consistent texter</option>
+                  <option value="balanced">Thoughtful, not constant</option>
+                  <option value="plans_first">Prefers making plans over chatting all day</option>
+                  <option value="light">Light and playful</option>
+                </select>
+              </label>
+              <label>
+                Ideal first date
+                <select name="firstDate">
+                  <option value="">Choose one</option>
+                  <option value="coffee_walk">Coffee and a walk</option>
+                  <option value="museum">Museum or gallery</option>
+                  <option value="bookstore">Bookstore and tea</option>
+                  <option value="food_crawl">Food crawl</option>
+                  <option value="farmer_market">Farmer's market</option>
+                  <option value="live_music">Live music</option>
+                  <option value="dinner">Dinner reservation</option>
+                </select>
+              </label>
+              <label>
+                Availability
+                <select name="availability">
+                  <option value="">Choose one</option>
+                  <option value="weekday_evenings">Mostly weeknights</option>
+                  <option value="weekends">Mostly weekends</option>
+                  <option value="flexible">Flexible most weeks</option>
+                </select>
+              </label>
+              <label>
+                First-meeting boundary
+                <select name="boundary">
+                  <option value="">Choose one</option>
+                  <option value="public_first">Public place first</option>
+                  <option value="video_first">Quick video call first</option>
+                  <option value="daytime_first">Prefer daytime meetups first</option>
+                  <option value="slow_messages">Like to message a bit before meeting</option>
+                </select>
+              </label>
+            </div>
+
+            <fieldset class="chips-field">
+              <legend>Green flags you care about</legend>
+              <div class="chips" id="greenFlagsGroup"></div>
+            </fieldset>
+
+            <div class="input-stack">
+              <label>
+                Short bio
+                <textarea
+                  name="about"
+                  rows="4"
+                  placeholder="I recharge with long walks, ambitious side projects, and cooking for people I like."
+                ></textarea>
+              </label>
+              <label>
+                Sunday routine
+                <textarea
+                  name="sunday"
+                  rows="3"
+                  placeholder="A perfect Sunday looks like..."
+                ></textarea>
+              </label>
+              <label>
+                Something you can geek out about
+                <textarea
+                  name="geekOut"
+                  rows="3"
+                  placeholder="I can talk for way too long about..."
+                ></textarea>
+              </label>
+              <label>
+                Dealbreaker or mismatch to avoid
+                <textarea
+                  name="dealbreaker"
+                  rows="2"
+                  placeholder="Looking to avoid last-minute energy and mixed signals."
+                ></textarea>
+              </label>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel panel-preview">
+          <div class="panel-heading">
+            <p class="eyebrow">Live output</p>
+            <h2>What the user sees</h2>
+            <p>
+              The preview shows how the profile reads in-product, while the fit cards illustrate
+              how this structure can support better ranking and matching later.
+            </p>
+          </div>
+
+          <article class="profile-card">
+            <div class="profile-photo">
+              <span id="avatarInitial">J</span>
+            </div>
+            <div class="profile-copy">
+              <div class="profile-header">
+                <h3 id="previewName">Jordan, 29</h3>
+                <p id="previewSubtitle">Chicago • Long-term relationship • Thoughtful, not constant</p>
+              </div>
+              <div class="badge-row" id="previewBadges"></div>
+              <p id="previewAbout"></p>
+              <div class="prompt-card">
+                <h4>Sunday routine</h4>
+                <p id="previewSunday"></p>
+              </div>
+              <div class="prompt-card">
+                <h4>Can geek out about</h4>
+                <p id="previewGeekOut"></p>
+              </div>
+              <div class="prompt-card accent">
+                <h4>Boundary</h4>
+                <p id="previewBoundary"></p>
+              </div>
+            </div>
+          </article>
+
+          <section class="matches-panel">
+            <div class="matches-heading">
+              <h3>Most compatible profile archetypes</h3>
+              <p>Not a recommendation engine yet, but a useful signal layer for the MVP.</p>
+            </div>
+            <div id="matchCards" class="match-cards"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

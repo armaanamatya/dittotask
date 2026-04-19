@@ -1,0 +1,18 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "D Ditto Lab" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e5]: D
+      - text: Ditto Lab
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - heading "Quest Insights" [level=1] [ref=e8]
+      - paragraph [ref=e9]: Track which micro-quests generate the strongest chemistry — and feed that signal into a smarter AI matcher.
+    - generic [ref=e16]:
+      - heading "How this feeds the AI matcher" [level=2] [ref=e17]
+      - paragraph [ref=e18]: Each row is a training signal. Quests with high average chemistry and comfort scores — combined with a high real-date conversion rate — get weighted more heavily when assigning future sessions. In v2, we layer in personality overlap from user profiles to predict which quest type fits which pair, and surface it automatically at match time.
+      - generic [ref=e19]:
+        - generic [ref=e20]: Green = strong signal
+        - generic [ref=e21]: Amber = moderate
+        - generic [ref=e22]: — = no data yet
+  - alert [ref=e23]

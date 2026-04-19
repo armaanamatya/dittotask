@@ -1,0 +1,70 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "D Ditto Lab" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: D
+        - text: Ditto Lab
+      - generic [ref=e36]:
+        - generic [ref=e37]: "|"
+        - combobox [ref=e38] [cursor=pointer]:
+          - option "Select user" [disabled] [selected]
+          - option "Alex Torres"
+          - option "Jordan Rivera"
+          - option "Maya Chen"
+          - option "Priya Nair"
+          - option "Sam Park"
+  - main [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]: D
+        - heading "Ditto Lab" [level=1] [ref=e10]
+        - paragraph [ref=e11]: Micro-Quest Chemistry Lab
+      - generic [ref=e12]:
+        - paragraph [ref=e13]: How it works
+        - generic [ref=e14]:
+          - generic [ref=e15]:
+            - generic [ref=e16]: "1"
+            - paragraph [ref=e17]: Get matched with someone. No swiping, no endless browsing.
+          - generic [ref=e18]:
+            - generic [ref=e19]: "2"
+            - paragraph [ref=e20]: Complete a low-stakes micro-quest together — a café chat, an art walk, a book swap.
+          - generic [ref=e21]:
+            - generic [ref=e22]: "3"
+            - paragraph [ref=e23]: Rate the vibes. We use your feedback to decide if a real date is worth it.
+      - generic [ref=e24]:
+        - paragraph [ref=e25]: Demo login
+        - paragraph [ref=e26]: Pick a user to explore the app
+        - generic [ref=e27]:
+          - button "A Alex Torres Music Production · Age 20" [ref=e39] [cursor=pointer]:
+            - generic [ref=e40]:
+              - generic [ref=e41]: A
+              - generic [ref=e42]:
+                - paragraph [ref=e43]: Alex Torres
+                - paragraph [ref=e44]: Music Production · Age 20
+          - button "J Jordan Rivera Environmental Studies · Age 21" [ref=e45] [cursor=pointer]:
+            - generic [ref=e46]:
+              - generic [ref=e47]: J
+              - generic [ref=e48]:
+                - paragraph [ref=e49]: Jordan Rivera
+                - paragraph [ref=e50]: Environmental Studies · Age 21
+          - button "M Maya Chen Computer Science · Age 20" [ref=e51] [cursor=pointer]:
+            - generic [ref=e52]:
+              - generic [ref=e53]: M
+              - generic [ref=e54]:
+                - paragraph [ref=e55]: Maya Chen
+                - paragraph [ref=e56]: Computer Science · Age 20
+          - button "P Priya Nair Psychology · Age 22" [ref=e57] [cursor=pointer]:
+            - generic [ref=e58]:
+              - generic [ref=e59]: P
+              - generic [ref=e60]:
+                - paragraph [ref=e61]: Priya Nair
+                - paragraph [ref=e62]: Psychology · Age 22
+          - button "S Sam Park Architecture · Age 19" [ref=e63] [cursor=pointer]:
+            - generic [ref=e64]:
+              - generic [ref=e65]: S
+              - generic [ref=e66]:
+                - paragraph [ref=e67]: Sam Park
+                - paragraph [ref=e68]: Architecture · Age 19
+        - button "Select a user to continue" [disabled] [ref=e33]
+  - alert [ref=e34]

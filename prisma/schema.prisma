@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String @id @default(cuid())
+  name          String
+  age           Int
+  major         String
+  interests     String
+  bio           String
+  locationLabel String @default("")
+  latitude      Float  @default(0)
+  longitude     Float  @default(0)
+  activityTags  String @default("")
+
+  matchesAsA       MicroQuestFeedback[] @relation("FeedbackUser")
+  matchesAsUserA   Match[]              @relation("UserA")
+  matchesAsUserB   Match[]              @relation("UserB")
+  authoredPosts    ActivityPost[]       @relation("PostAuthor")
+  matchedPosts     ActivityPost[]       @relation("PostMatchedUser")
+}
+
+model Match {
+  id      String @id @default(cuid())
+  userAId String
+  userBId String
+  status  String @default("pending-quest")
+
+  userA    User               @relation("UserA", fields: [userAId], references: [id])
+  userB    User               @relation("UserB", fields: [userBId], references: [id])
+  sessions MicroQuestSession[]
+}
+
+model MicroQuestTemplate {
+  id                       String @id @default(cuid())
+  title                    String
+  description              String
+  suggestedDurationMinutes Int
+  suggestedContext         String
+  reflectionPrompts        String
+
+  sessions MicroQuestSession[]
+}
+
+model MicroQuestSession {
+  id              String   @id @default(cuid())
+  matchId         String
+  questTemplateId String
+  status          String   @default("assigned")
+  createdAt       DateTime @default(now())
+  activityPostId  String?
+
+  match        Match              @relation(fields: [matchId], references: [id])
+  template     MicroQuestTemplate @relation(fields: [questTemplateId], references: [id])
+  activityPost ActivityPost?      @relation(fields: [activityPostId], references: [id])
+  feedbacks    MicroQuestFeedback[]
+}
+
+model MicroQuestFeedback {
+  id                  String   @id @default(cuid())
+  questSessionId      String
+  userId              String
+  completionTimestamp DateTime @default(now())
+  chemistry           Int
+  comfort             Int
+  wouldDoRealDate     String
+  comment             String?
+
+  session MicroQuestSession @relation(fields: [questSessionId], references: [id])
+  user    User              @relation("FeedbackUser", fields: [userId], references: [id])
+}
+
+model ActivityPost {
+  id            String   @id @default(cuid())
+  authorId      String
+  body          String
+  activityType  String
+  latitude      Float
+  longitude     Float
+  locationLabel String
+  status        String   @default("active")
+  createdAt     DateTime @default(now())
+  matchedUserId String?
+
+  author       User                @relation("PostAuthor", fields: [authorId], references: [id])
+  matchedUser  User?               @relation("PostMatchedUser", fields: [matchedUserId], references: [id])
+  sessions     MicroQuestSession[]
+}
