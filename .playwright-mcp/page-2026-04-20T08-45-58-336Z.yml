@@ -1,0 +1,28 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "D Ditto Lab" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e5]: D
+      - text: Ditto Lab
+  - main [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]: D
+        - heading "Ditto Lab" [level=1] [ref=e10]
+        - paragraph [ref=e11]: Micro-Quest Chemistry Lab
+      - generic [ref=e12]:
+        - paragraph [ref=e13]: How it works
+        - generic [ref=e14]:
+          - generic [ref=e15]:
+            - generic [ref=e16]: "1"
+            - paragraph [ref=e17]: Get matched with someone. No swiping, no endless browsing.
+          - generic [ref=e18]:
+            - generic [ref=e19]: "2"
+            - paragraph [ref=e20]: Complete a low-stakes micro-quest together — a café chat, an art walk, a book swap.
+          - generic [ref=e21]:
+            - generic [ref=e22]: "3"
+            - paragraph [ref=e23]: Rate the vibes. We use your feedback to decide if a real date is worth it.
+      - generic [ref=e24]:
+        - paragraph [ref=e25]: Demo login
+        - paragraph [ref=e26]: Pick a user to explore the app
+        - button "Select a user to continue" [disabled] [ref=e33]

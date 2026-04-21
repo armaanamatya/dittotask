@@ -1,0 +1,102 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "D Ditto Lab" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: D
+        - text: Ditto Lab
+      - generic [ref=e24]:
+        - link "Dashboard" [ref=e25] [cursor=pointer]:
+          - /url: /dashboard
+        - link "Insights" [ref=e26] [cursor=pointer]:
+          - /url: /insights
+        - generic [ref=e27]:
+          - generic [ref=e28]: "|"
+          - combobox [ref=e29] [cursor=pointer]:
+            - option "Select user" [disabled]
+            - option "Alex Torres"
+            - option "Jordan Rivera"
+            - option "Maya Chen" [selected]
+            - option "Priya Nair"
+            - option "Sam Park"
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - heading "Quest Insights" [level=1] [ref=e8]
+      - paragraph [ref=e9]: Track which micro-quests generate the strongest chemistry — and feed that signal into a smarter AI matcher.
+    - table [ref=e31]:
+      - rowgroup [ref=e32]:
+        - row "Quest Sessions Completed Avg Chemistry Avg Comfort Both → Date" [ref=e33]:
+          - columnheader "Quest" [ref=e34]
+          - columnheader "Sessions" [ref=e35]
+          - columnheader "Completed" [ref=e36]
+          - columnheader "Avg Chemistry" [ref=e37]
+          - columnheader "Avg Comfort" [ref=e38]
+          - columnheader "Both → Date" [ref=e39]
+      - rowgroup [ref=e40]:
+        - row "Art Walk & Observe Campus art installation or outdoor space 1 1 4/5 4.5/5 100%" [ref=e41]:
+          - cell "Art Walk & Observe Campus art installation or outdoor space" [ref=e42]:
+            - paragraph [ref=e43]: Art Walk & Observe
+            - paragraph [ref=e44]: Campus art installation or outdoor space
+          - cell "1" [ref=e45]
+          - cell "1" [ref=e46]
+          - cell "4/5" [ref=e47]:
+            - generic [ref=e48]:
+              - text: "4"
+              - generic [ref=e49]: /5
+          - cell "4.5/5" [ref=e50]:
+            - generic [ref=e51]:
+              - text: "4.5"
+              - generic [ref=e52]: /5
+          - cell "100%" [ref=e53]:
+            - generic [ref=e54]: 100%
+        - row "Bookstore Scavenger Campus bookstore or library 1 1 3.5/5 4/5 100%" [ref=e55]:
+          - cell "Bookstore Scavenger Campus bookstore or library" [ref=e56]:
+            - paragraph [ref=e57]: Bookstore Scavenger
+            - paragraph [ref=e58]: Campus bookstore or library
+          - cell "1" [ref=e59]
+          - cell "1" [ref=e60]
+          - cell "3.5/5" [ref=e61]:
+            - generic [ref=e62]:
+              - text: "3.5"
+              - generic [ref=e63]: /5
+          - cell "4/5" [ref=e64]:
+            - generic [ref=e65]:
+              - text: "4"
+              - generic [ref=e66]: /5
+          - cell "100%" [ref=e67]:
+            - generic [ref=e68]: 100%
+        - row "Campus Café Conversation Campus café or coffee shop 1 0 — — —" [ref=e69]:
+          - cell "Campus Café Conversation Campus café or coffee shop" [ref=e70]:
+            - paragraph [ref=e71]: Campus Café Conversation
+            - paragraph [ref=e72]: Campus café or coffee shop
+          - cell "1" [ref=e73]
+          - cell "0" [ref=e74]
+          - cell "—" [ref=e75]
+          - cell "—" [ref=e76]
+          - cell "—" [ref=e77]
+        - row "Food Truck Roulette Campus food trucks or nearby street food 0 0 — — —" [ref=e78]:
+          - cell "Food Truck Roulette Campus food trucks or nearby street food" [ref=e79]:
+            - paragraph [ref=e80]: Food Truck Roulette
+            - paragraph [ref=e81]: Campus food trucks or nearby street food
+          - cell "0" [ref=e82]
+          - cell "0" [ref=e83]
+          - cell "—" [ref=e84]
+          - cell "—" [ref=e85]
+          - cell "—" [ref=e86]
+        - row "Sunset Stroll Campus grounds or nearby park 0 0 — — —" [ref=e87]:
+          - cell "Sunset Stroll Campus grounds or nearby park" [ref=e88]:
+            - paragraph [ref=e89]: Sunset Stroll
+            - paragraph [ref=e90]: Campus grounds or nearby park
+          - cell "0" [ref=e91]
+          - cell "0" [ref=e92]
+          - cell "—" [ref=e93]
+          - cell "—" [ref=e94]
+          - cell "—" [ref=e95]
+    - generic [ref=e16]:
+      - heading "How this feeds the AI matcher" [level=2] [ref=e17]
+      - paragraph [ref=e18]: Each row is a training signal. Quests with high average chemistry and comfort scores — combined with a high real-date conversion rate — get weighted more heavily when assigning future sessions. In v2, we layer in personality overlap from user profiles to predict which quest type fits which pair, and surface it automatically at match time.
+      - generic [ref=e19]:
+        - generic [ref=e20]: Green = strong signal
+        - generic [ref=e21]: Amber = moderate
+        - generic [ref=e22]: — = no data yet
+  - alert [ref=e23]
