@@ -55,9 +55,13 @@ function toRad(deg: number): number {
  */
 export function computeCandidates(
   post: { authorId: string; activityType: string; latitude: number; longitude: number },
-  allUsers: { id: string; name: string; major: string; latitude: number; longitude: number; locationLabel: string; activityTags: string }[],
+  allUsers: { id: string; name: string; major: string; latitude: number; longitude: number; locationLabel: string; activityTags: string; interests: string }[],
   pendingMatchUserIds: Set<string>
 ) {
+  const author = allUsers.find((u) => u.id === post.authorId);
+  const authorInterests = author ? author.interests.toLowerCase().split(',').map(s => s.trim()) : [];
+  const authorTags = author ? author.activityTags.toLowerCase().split(',').map(s => s.trim()) : [];
+
   return allUsers
     .filter((u) => {
       if (u.id === post.authorId) return false;
@@ -68,9 +72,23 @@ export function computeCandidates(
       if (dist > 1.5) return false;
       return true;
     })
-    .map((u) => ({
-      ...u,
-      distanceMiles: Math.round(distanceMiles(post.latitude, post.longitude, u.latitude, u.longitude) * 100) / 100,
-    }))
+    .map((u) => {
+      const uInterests = u.interests.toLowerCase().split(',').map(s => s.trim());
+      const uTags = u.activityTags.toLowerCase().split(',').map(s => s.trim());
+      let score = 0;
+      uInterests.forEach(i => {
+        if (authorInterests.some(ai => ai.includes(i) || i.includes(ai))) score += 0.4;
+      });
+      uTags.forEach(t => {
+        if (authorTags.includes(t)) score += 0.2;
+      });
+      score = Math.max(0.1, Math.min(1.0, score));
+
+      return {
+        ...u,
+        distanceMiles: Math.round(distanceMiles(post.latitude, post.longitude, u.latitude, u.longitude) * 100) / 100,
+        compatibilityScore: score,
+      };
+    })
     .sort((a, b) => a.distanceMiles - b.distanceMiles);
 }

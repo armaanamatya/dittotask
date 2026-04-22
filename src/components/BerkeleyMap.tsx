@@ -2,9 +2,9 @@
 
 import 'leaflet/dist/leaflet.css';
 import { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from 'react-leaflet';
 import L from 'leaflet';
-import type { MapUser, ActivityPost } from '@/lib/types';
+import type { MapUser, ActivityPost, ActivityCandidate } from '@/lib/types';
 
 // Fix default marker icons in Next.js/webpack
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -45,7 +45,7 @@ interface Props {
   users: MapUser[];
   posts: ActivityPost[];
   selectedPostId: string | null;
-  candidateIds: Set<string>;
+  candidates: ActivityCandidate[];
   currentUserId: string;
   onSelectPost: (postId: string) => void;
 }
@@ -62,10 +62,11 @@ export default function BerkeleyMap({
   users,
   posts,
   selectedPostId,
-  candidateIds,
+  candidates,
   currentUserId,
   onSelectPost,
 }: Props) {
+  const candidateIds = new Set(candidates.map(c => c.id));
   const selectedPost = posts.find((p) => p.id === selectedPostId);
   const centerLat = selectedPost?.latitude ?? BERKELEY_CENTER[0];
   const centerLng = selectedPost?.longitude ?? BERKELEY_CENTER[1];
@@ -161,6 +162,27 @@ export default function BerkeleyMap({
               </div>
             </Popup>
           </Marker>
+        );
+      })}
+
+      {/* Connection Lines */}
+      {selectedPost && candidates.map(c => {
+        // Line color based on compatibility score (red to green)
+        const r = Math.round(255 * Math.max(0, 1 - c.compatibilityScore));
+        const g = Math.round(255 * Math.min(1, c.compatibilityScore));
+        const color = `rgb(${r}, ${g}, 0)`;
+        return (
+          <Polyline
+            key={`line-${c.id}`}
+            positions={[
+              [selectedPost.latitude, selectedPost.longitude],
+              [c.latitude, c.longitude]
+            ]}
+            color={color}
+            weight={3}
+            dashArray="5, 8"
+            opacity={0.6}
+          />
         );
       })}
     </MapContainer>

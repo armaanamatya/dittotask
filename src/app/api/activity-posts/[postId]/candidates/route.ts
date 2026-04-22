@@ -40,6 +40,7 @@ export async function GET(
       longitude: u.longitude,
       locationLabel: u.locationLabel,
       activityTags: u.activityTags,
+      interests: u.interests,
     })),
     pendingMatchUserIds
   );

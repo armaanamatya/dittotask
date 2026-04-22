@@ -45,6 +45,7 @@ export interface ActivityCandidate {
   locationLabel: string;
   activityTags: string;
   distanceMiles: number;
+  compatibilityScore: number;
 }
 
 export interface BerkeleyDashboardData {

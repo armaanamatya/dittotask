@@ -90,10 +90,7 @@ export default function Home() {
       .catch(() => setCandidatesLoading(false));
   }, [selectedPostId]);
 
-  const candidateIds = useMemo(
-    () => new Set(candidates.map((c) => c.id)),
-    [candidates]
-  );
+
 
   const handlePost = async () => {
     if (!postText.trim() || posting || !activeUser) return;
@@ -155,7 +152,7 @@ export default function Home() {
             users={usersOnMap}
             posts={activePosts}
             selectedPostId={selectedPostId}
-            candidateIds={candidateIds}
+            candidates={candidates}
             currentUserId={user.id}
             onSelectPost={setSelectedPostId}
           />
@@ -272,7 +269,7 @@ export default function Home() {
                       <div>
                         <p className="candidate-name">{c.name}</p>
                         <p className="candidate-meta">
-                          {c.major} · {c.distanceMiles} mi · 📍 {c.locationLabel}
+                          {c.major} · {c.distanceMiles} mi · 📍 {c.locationLabel} · Connection: {Math.round(c.compatibilityScore * 100)}%
                         </p>
                         <div className="candidate-tags">
                           {c.activityTags.split(',').map((t) => (
