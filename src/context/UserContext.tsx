@@ -31,6 +31,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         if (savedId) {
           const found = users.find((u) => u.id === savedId);
           if (found) setCurrentUserState(found);
+          else if (users.length > 0) setCurrentUserState(users[0]);
+        } else if (users.length > 0) {
+          // Auto-select first user so the app boots straight into admin view
+          setCurrentUserState(users[0]);
+          localStorage.setItem('ditto-userId', users[0].id);
         }
         setLoading(false);
       });

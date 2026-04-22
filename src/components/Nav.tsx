@@ -16,52 +16,95 @@ export function Nav() {
   const navLink = (href: string, label: string) => (
     <Link
       href={href}
-      className={`text-sm transition-colors ${
-        pathname === href
-          ? 'text-rose-500 font-semibold'
-          : 'text-slate-500 hover:text-slate-800'
-      }`}
+      style={{
+        fontSize: 13,
+        fontWeight: pathname === href ? 600 : 400,
+        color: pathname === href ? '#f43f5e' : '#64748b',
+        textDecoration: 'none',
+        transition: 'color 0.15s',
+      }}
     >
       {label}
     </Link>
   );
 
   return (
-    <nav className="bg-white border-b border-slate-200 sticky top-0 z-50 h-14">
-      <div className="max-w-5xl mx-auto px-4 h-full flex items-center justify-between gap-4">
+    <nav style={{
+      background: '#1a1d27',
+      borderBottom: '1px solid rgba(255,255,255,0.07)',
+      position: 'sticky',
+      top: 0,
+      zIndex: 50,
+      height: 56,
+    }}>
+      <div style={{
+        maxWidth: '100%',
+        padding: '0 20px',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 16,
+      }}>
         <Link
           href="/"
-          className="text-rose-500 font-bold text-base tracking-tight flex items-center gap-2"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            textDecoration: 'none',
+            color: '#f43f5e',
+            fontWeight: 700,
+            fontSize: 15,
+          }}
         >
-          <span className="w-6 h-6 bg-rose-500 text-white text-xs font-bold rounded flex items-center justify-center">
+          <span style={{
+            width: 26,
+            height: 26,
+            background: 'linear-gradient(135deg, #f43f5e, #e11d48)',
+            borderRadius: 7,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontSize: 13,
+            fontWeight: 800,
+            boxShadow: '0 0 12px rgba(244,63,94,0.35)',
+          }}>
             D
           </span>
           Ditto Lab
         </Link>
 
-        <div className="flex items-center gap-5">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
           {currentUser && (
             <>
-              {navLink('/dashboard', 'Dashboard')}
               {navLink('/insights', 'Insights')}
             </>
           )}
 
           {!loading && (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-slate-300 hidden sm:block">|</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ color: 'rgba(255,255,255,0.1)', fontSize: 12 }}>|</span>
               <select
                 value={currentUser?.id ?? ''}
                 onChange={handleUserChange}
-                className="text-xs border border-slate-200 rounded-lg px-2 py-1.5 bg-white text-slate-600 focus:outline-none focus:ring-2 focus:ring-rose-200 cursor-pointer max-w-36"
+                style={{
+                  fontSize: 12,
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  borderRadius: 8,
+                  padding: '4px 8px',
+                  background: '#0f1117',
+                  color: '#94a3b8',
+                  outline: 'none',
+                  cursor: 'pointer',
+                  maxWidth: 160,
+                  fontFamily: 'inherit',
+                }}
               >
-                <option value="" disabled>
-                  Select user
-                </option>
+                <option value="" disabled>Select user</option>
                 {allUsers.map((u) => (
-                  <option key={u.id} value={u.id}>
-                    {u.name}
-                  </option>
+                  <option key={u.id} value={u.id}>{u.name}</option>
                 ))}
               </select>
             </div>

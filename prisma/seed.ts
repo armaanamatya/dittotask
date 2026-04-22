@@ -63,6 +63,18 @@ const questTemplates = [
       'If you could teleport to eat one meal anywhere in the world right now, where would you go?',
     ]),
   },
+  {
+    title: 'Spontaneous Activity Invite',
+    description:
+      'Someone nearby is doing something fun and wants company. Join them for a spontaneous hangout based on a shared interest.',
+    suggestedDurationMinutes: 30,
+    suggestedContext: 'Wherever the activity takes you',
+    reflectionPrompts: JSON.stringify([
+      'What made you decide to join?',
+      'Did meeting this way feel more natural than a planned date?',
+      'Would you do something spontaneous like this again?',
+    ]),
+  },
 ];
 
 const users = [
@@ -72,6 +84,10 @@ const users = [
     major: 'Computer Science',
     interests: 'hiking, indie music, cooking, photography',
     bio: 'Junior CS major who spends weekends on hiking trails and weeknights experimenting with new recipes. Big fan of film photography and live shows.',
+    locationLabel: 'Soda Hall',
+    latitude: 37.8756,
+    longitude: -122.2588,
+    activityTags: 'run,walk,coffee,study',
   },
   {
     name: 'Jordan Rivera',
@@ -79,6 +95,10 @@ const users = [
     major: 'Environmental Studies',
     interests: 'rock climbing, podcasts, sustainable fashion, board games',
     bio: 'Passionate about climate solutions by day, competitive board game player by night. Always down for a good long-form podcast recommendation.',
+    locationLabel: 'Mulford Hall',
+    latitude: 37.8723,
+    longitude: -122.2640,
+    activityTags: 'run,walk,hangout,study',
   },
   {
     name: 'Sam Park',
@@ -86,6 +106,10 @@ const users = [
     major: 'Architecture',
     interests: 'sketching, coffee, jazz, urban design',
     bio: 'Sophomore architecture student with a sketchbook always in hand. Obsessed with city planning and the perfect pour-over coffee.',
+    locationLabel: 'Wurster Hall',
+    latitude: 37.8707,
+    longitude: -122.2548,
+    activityTags: 'coffee,art,walk,study',
   },
   {
     name: 'Priya Nair',
@@ -93,6 +117,10 @@ const users = [
     major: 'Psychology',
     interests: 'reading, yoga, documentary films, volunteer work',
     bio: 'Senior psych major fascinated by human behavior. Spends free time at the library or volunteering at the campus wellness center.',
+    locationLabel: 'Tolman Hall',
+    latitude: 37.8742,
+    longitude: -122.2636,
+    activityTags: 'walk,coffee,study,art',
   },
   {
     name: 'Alex Torres',
@@ -100,6 +128,43 @@ const users = [
     major: 'Music Production',
     interests: 'DJing, basketball, philosophy, street art',
     bio: 'Producing tracks between classes and studying philosophy for the big questions. Will always challenge you to a 1-on-1 on the court.',
+    locationLabel: 'Morrison Hall',
+    latitude: 37.8720,
+    longitude: -122.2578,
+    activityTags: 'run,hangout,art,food',
+  },
+  {
+    name: 'Lena Okafor',
+    age: 21,
+    major: 'Data Science',
+    interests: 'running, boba, machine learning, anime',
+    bio: 'Training for a half marathon while training neural nets. Will review your ML paper if you buy her boba.',
+    locationLabel: 'Evans Hall',
+    latitude: 37.8736,
+    longitude: -122.2578,
+    activityTags: 'run,coffee,study,food',
+  },
+  {
+    name: 'Diego Morales',
+    age: 20,
+    major: 'Political Science',
+    interests: 'debate, soccer, cooking, documentaries',
+    bio: 'Debate team captain who unwinds with pickup soccer. Cooks a mean pozole and has strong opinions about documentary filmmaking.',
+    locationLabel: 'Barrows Hall',
+    latitude: 37.8699,
+    longitude: -122.2583,
+    activityTags: 'run,food,hangout,walk',
+  },
+  {
+    name: 'Aisha Patel',
+    age: 19,
+    major: 'Molecular Biology',
+    interests: 'yoga, thrifting, plant care, coffee',
+    bio: 'Pre-med who de-stresses with yoga and weekend thrift runs. Has an apartment full of plants she talks to.',
+    locationLabel: 'Stanley Hall',
+    latitude: 37.8745,
+    longitude: -122.2556,
+    activityTags: 'walk,coffee,art,study',
   },
 ];
 
@@ -109,6 +174,7 @@ async function main() {
   await prisma.microQuestFeedback.deleteMany();
   await prisma.microQuestSession.deleteMany();
   await prisma.match.deleteMany();
+  await prisma.activityPost.deleteMany();
   await prisma.microQuestTemplate.deleteMany();
   await prisma.user.deleteMany();
 
@@ -122,7 +188,7 @@ async function main() {
   );
   console.log(`Created ${createdUsers.length} users`);
 
-  // Maya & Jordan, Sam & Priya, Alex & Maya
+  // Existing match pairs for historical data: Maya & Jordan, Sam & Priya, Alex & Maya
   const matchPairs: [number, number][] = [
     [0, 1],
     [2, 3],
@@ -203,9 +269,54 @@ async function main() {
     data: { status: 'completed-one' },
   });
 
+  // Seed activity posts
+  const activityPosts = [
+    {
+      authorId: createdUsers[0].id, // Maya
+      body: 'going for a run around the fire trails. anyone care to join?',
+      activityType: 'run',
+      latitude: createdUsers[0].latitude,
+      longitude: createdUsers[0].longitude,
+      locationLabel: createdUsers[0].locationLabel,
+      status: 'active',
+    },
+    {
+      authorId: createdUsers[2].id, // Sam
+      body: 'heading to Philz for a pour-over. need a study buddy ☕',
+      activityType: 'coffee',
+      latitude: createdUsers[2].latitude,
+      longitude: createdUsers[2].longitude,
+      locationLabel: createdUsers[2].locationLabel,
+      status: 'active',
+    },
+    {
+      authorId: createdUsers[5].id, // Lena
+      body: 'anyone want to grab food at the food trucks on Durant?',
+      activityType: 'food',
+      latitude: createdUsers[5].latitude,
+      longitude: createdUsers[5].longitude,
+      locationLabel: createdUsers[5].locationLabel,
+      status: 'active',
+    },
+    {
+      authorId: createdUsers[6].id, // Diego
+      body: 'pickup soccer at the fields in 30 min, need one more!',
+      activityType: 'run',
+      latitude: createdUsers[6].latitude,
+      longitude: createdUsers[6].longitude,
+      locationLabel: createdUsers[6].locationLabel,
+      status: 'active',
+    },
+  ];
+
+  await Promise.all(
+    activityPosts.map((p) => prisma.activityPost.create({ data: p }))
+  );
+  console.log(`Created ${activityPosts.length} activity posts`);
+
   console.log('Seed complete!');
   console.log('\nDemo users:');
-  createdUsers.forEach((u) => console.log(`  ${u.name} — id: ${u.id}`));
+  createdUsers.forEach((u) => console.log(`  ${u.name} — id: ${u.id} — ${u.locationLabel}`));
 }
 
 main()

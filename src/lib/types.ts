@@ -5,6 +5,52 @@ export interface User {
   major: string;
   interests: string;
   bio: string;
+  locationLabel: string;
+  latitude: number;
+  longitude: number;
+  activityTags: string;
+}
+
+export interface MapUser {
+  id: string;
+  name: string;
+  major: string;
+  latitude: number;
+  longitude: number;
+  locationLabel: string;
+  activityTags: string;
+}
+
+export interface ActivityPost {
+  id: string;
+  authorId: string;
+  authorName: string;
+  body: string;
+  activityType: string;
+  latitude: number;
+  longitude: number;
+  locationLabel: string;
+  status: 'active' | 'matched' | 'expired';
+  createdAt: string;
+  matchedUserId: string | null;
+  matchedUserName: string | null;
+}
+
+export interface ActivityCandidate {
+  id: string;
+  name: string;
+  major: string;
+  latitude: number;
+  longitude: number;
+  locationLabel: string;
+  activityTags: string;
+  distanceMiles: number;
+}
+
+export interface BerkeleyDashboardData {
+  currentUser: User;
+  usersOnMap: MapUser[];
+  activePosts: ActivityPost[];
 }
 
 export interface MicroQuestTemplate {

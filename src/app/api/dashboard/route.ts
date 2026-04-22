@@ -12,50 +12,41 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'User not found' }, { status: 404 });
   }
 
-  const matches = await prisma.match.findMany({
-    where: { OR: [{ userAId: userId }, { userBId: userId }] },
-    include: {
-      userA: true,
-      userB: true,
-      sessions: {
-        orderBy: { createdAt: 'desc' },
-        take: 1,
-        include: {
-          template: true,
-          feedbacks: true,
-        },
-      },
-    },
-    orderBy: { id: 'asc' },
+  const allUsers = await prisma.user.findMany();
+  const usersOnMap = allUsers.map((u) => ({
+    id: u.id,
+    name: u.name,
+    major: u.major,
+    latitude: u.latitude,
+    longitude: u.longitude,
+    locationLabel: u.locationLabel,
+    activityTags: u.activityTags,
+  }));
+
+  const activePosts = await prisma.activityPost.findMany({
+    where: { status: { in: ['active', 'matched'] } },
+    include: { author: true, matchedUser: true },
+    orderBy: { createdAt: 'desc' },
   });
 
-  const matchData = matches.map((match) => {
-    const partner = match.userAId === userId ? match.userB : match.userA;
-    const session = match.sessions[0] ?? null;
+  const serializedPosts = activePosts.map((p) => ({
+    id: p.id,
+    authorId: p.authorId,
+    authorName: p.author.name,
+    body: p.body,
+    activityType: p.activityType,
+    latitude: p.latitude,
+    longitude: p.longitude,
+    locationLabel: p.locationLabel,
+    status: p.status,
+    createdAt: p.createdAt.toISOString(),
+    matchedUserId: p.matchedUserId,
+    matchedUserName: p.matchedUser?.name ?? null,
+  }));
 
-    let sessionData = null;
-    if (session) {
-      const myFeedback = session.feedbacks.find((f) => f.userId === userId) ?? null;
-      const partnerFeedback = session.feedbacks.find((f) => f.userId === partner.id) ?? null;
-      sessionData = {
-        id: session.id,
-        status: session.status,
-        template: {
-          ...session.template,
-          reflectionPrompts: JSON.parse(session.template.reflectionPrompts) as string[],
-        },
-        myFeedback,
-        partnerFeedback,
-      };
-    }
-
-    return {
-      id: match.id,
-      status: match.status,
-      partner,
-      session: sessionData,
-    };
+  return NextResponse.json({
+    currentUser: user,
+    usersOnMap,
+    activePosts: serializedPosts,
   });
-
-  return NextResponse.json({ user, matches: matchData });
 }
