@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { useUser } from '@/context/UserContext';
 import type { BerkeleyDashboardData, ActivityPost, ActivityCandidate } from '@/lib/types';
+import { Toast, type ToastMessage } from '@/components/Toast';
 
 const BerkeleyMap = dynamic(() => import('@/components/BerkeleyMap'), { ssr: false });
 
@@ -37,6 +38,7 @@ export default function Home() {
   const [postText, setPostText] = useState('');
   const [posting, setPosting] = useState(false);
   const [matching, setMatching] = useState<string | null>(null);
+  const [toast, setToast] = useState<ToastMessage | null>(null);
   const adminPanelRef = useRef<HTMLDivElement>(null);
 
   // Auto-select admin (first user) if nobody is picked
@@ -106,13 +108,18 @@ export default function Home() {
         setPostText('');
         setSelectedPostId(newPost.id);
         fetchData();
+      } else {
+        setToast({ text: 'Failed to post. Please try again.', type: 'error' });
       }
+    } catch {
+      setToast({ text: 'Network error. Please try again.', type: 'error' });
     } finally {
       setPosting(false);
     }
   };
 
-  const handleMatch = async (postId: string, matchedUserId: string) => {
+  const handleMatch = async (postId: string, matchedUserId: string, matchedName: string) => {
+    if (!confirm(`Match with ${matchedName}? This cannot be undone.`)) return;
     setMatching(matchedUserId);
     try {
       const res = await fetch(`/api/activity-posts/${postId}/match`, {
@@ -121,9 +128,14 @@ export default function Home() {
         body: JSON.stringify({ matchedUserId }),
       });
       if (res.ok) {
+        setToast({ text: `Matched with ${matchedName}! A MicroQuest session has been created.`, type: 'success' });
         setSelectedPostId(null);
         fetchData();
+      } else {
+        setToast({ text: 'Failed to create match. Please try again.', type: 'error' });
       }
+    } catch {
+      setToast({ text: 'Network error. Please try again.', type: 'error' });
     } finally {
       setMatching(null);
     }
@@ -144,6 +156,8 @@ export default function Home() {
   const selectedPost = activePosts.find((p) => p.id === selectedPostId);
 
   return (
+    <>
+    <Toast message={toast} onDismiss={() => setToast(null)} />
     <div className="dashboard-layout">
       {/* LEFT — Map */}
       <div className="dashboard-map">
@@ -208,6 +222,7 @@ export default function Home() {
               onClick={handlePost}
               disabled={!postText.trim() || posting}
               className="composer-btn"
+              aria-label="Post activity"
             >
               {posting ? '…' : '→'}
             </button>
@@ -219,7 +234,11 @@ export default function Home() {
           <p className="section-label">Activity Feed</p>
           {activePosts.length === 0 ? (
             <div className="card empty-state">
-              <p>No activity posts yet. Be the first!</p>
+              <p className="empty-state-icon">👋</p>
+              <p className="empty-state-title">No activity posts yet</p>
+              <p className="empty-state-sub">
+                Share what you&apos;re up to — a run, coffee, study session — and get matched with someone nearby who&apos;s down for the same thing.
+              </p>
             </div>
           ) : (
             <div className="feed-list">
@@ -284,9 +303,10 @@ export default function Home() {
                       </div>
                     </div>
                     <button
-                      onClick={() => handleMatch(selectedPost.id, c.id)}
+                      onClick={() => handleMatch(selectedPost.id, c.id, c.name)}
                       disabled={matching !== null}
                       className="match-btn"
+                      aria-label={`Match ${c.name} with ${selectedPost.authorName}`}
                     >
                       {matching === c.id ? '…' : 'Match'}
                     </button>
@@ -308,6 +328,7 @@ export default function Home() {
         )}
       </div>
     </div>
+    </>
   );
 }
 

@@ -1,3 +1,5 @@
+import { SEARCH_RADIUS_MILES } from './config';
+
 /**
  * Maps free-text post body to a coarse activity type via keyword heuristics.
  */
@@ -69,7 +71,7 @@ export function computeCandidates(
       const tags = u.activityTags.split(',').map((t) => t.trim());
       if (!tags.includes(post.activityType)) return false;
       const dist = distanceMiles(post.latitude, post.longitude, u.latitude, u.longitude);
-      if (dist > 1.5) return false;
+      if (dist > SEARCH_RADIUS_MILES) return false;
       return true;
     })
     .map((u) => {
