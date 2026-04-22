@@ -50,7 +50,7 @@ export default function Home() {
 
   const fetchData = useCallback(() => {
     if (!activeUser) return;
-    fetch(`/api/dashboard?userId=${activeUser.id}`)
+    fetch(`/api/dashboard?userId=${activeUser.id}&t=${Date.now()}`)
       .then((r) => r.json())
       .then((d) => {
         setData(d);
@@ -81,7 +81,7 @@ export default function Home() {
       return;
     }
     setCandidatesLoading(true);
-    fetch(`/api/activity-posts/${selectedPostId}/candidates`)
+    fetch(`/api/activity-posts/${selectedPostId}/candidates?t=${Date.now()}`)
       .then((r) => r.json())
       .then((c) => {
         setCandidates(c);
